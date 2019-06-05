@@ -27,7 +27,7 @@ class GraphQLHandler (private val schema: GraphQLSchema){
     }
 
     suspend fun execute(req: GraphQLRequest, ctx:Any?=null): ExecutionResult{
-        return execute(req.query, req.variables, req.operationName, req.ctx)
+        return execute(req.query, req.variables?: emptyMap(), req.operationName, req.ctx)
     }
     suspend fun execute(query:String, params:Map<String, Any>?, op:String?, ctx:Any?): ExecutionResult {
         val graphql = GraphQL.newGraphQL(schema).build()
